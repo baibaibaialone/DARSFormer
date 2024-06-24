@@ -17,7 +17,7 @@ if __name__ == '__main__':
                                                       slope=0.2,
                                                       lr=0.001,
                                                       wd=5e-3,
-                                                      random_seed=1234,
+                                                      random_seed=1245,
                                                       cuda=True)
     save_to_file(fprs, "fprs.pkl")
     save_to_file(tprs, "tprs.pkl")
