@@ -203,18 +203,18 @@ def Train(directory, epochs, n_classes, in_size, out_dim, dropout, slope, lr, wd
                         out_dim=out_dim,
                         dropout=dropout,
                         slope=slope,
-                        node_dropout=0.1,
-                        input_droprate=0.1,
-                        hidden_droprate=0.1,
+                        node_dropout=0,
+                        input_droprate=0,
+                        hidden_droprate=0,
 
                         nclass=64,
                         nfeat=64,
                            nlayer=2 ,
                            hidden_dim=64,
                            nheads=2,
-                           tran_dropout=0.1,
-                           feat_dropout=0.1,
-                           prop_dropout=0.1,
+                           tran_dropout=0,
+                           feat_dropout=0,
+                           prop_dropout=0,
                            norm='none'
 
                       )
