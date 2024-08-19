@@ -257,7 +257,7 @@ def Train(directory, epochs, n_classes, in_size, out_dim, dropout, slope, lr, wd
             model.train()
             with torch.autograd.set_detect_anomaly(True):
                 optimizer.zero_grad()
-                score_train = model(g_train, src_train, dst_train, True)  # train集子图进入model训练
+                score_train = model(g_train, src_train, dst_train, False)  # train集子图进入model训练
                 loss_train = cul_loss(score_train, label_train, model)
                 # loss_train += 0.001 * model.ortho_loss()
 
@@ -267,7 +267,7 @@ def Train(directory, epochs, n_classes, in_size, out_dim, dropout, slope, lr, wd
 
             model.eval()
             with torch.no_grad():   # with torch.no_grad()或者@torch.no_grad()中的数据不需要计算梯度，也不会进行反向传播
-                score_val = model(g, src_test, dst_test, False)    # 注意在整个图g中训练测试集
+                score_val = model(g, src_test, dst_test, True)    # 注意在整个图g中训练测试集
                 loss_val = cul_loss(score_val, label_test,model)
 
             score_train_cpu = np.squeeze(score_train.cpu().detach().numpy())        # 在深度学习训练后，需要计算每个epoch得到的模型的训练效果的时候，
@@ -313,7 +313,7 @@ def Train(directory, epochs, n_classes, in_size, out_dim, dropout, slope, lr, wd
 
         with torch.no_grad():
             model.load_state_dict(best_model_state)
-            score_test = model(g, src_test, dst_test, False)   # 测试分数和验证分数相同？？？
+            score_test = model(g, src_test, dst_test, True)   # 测试分数和验证分数相同？？？
 
 
         score_test_cpu = np.squeeze(score_test.cpu().detach().numpy())  # np.squeeze删除指定的维度
