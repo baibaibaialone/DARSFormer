@@ -87,6 +87,9 @@ def Train(directory, epochs, n_classes, in_size, out_dim, dropout, slope, lr, wd
     #dgl
     adj_max = g.adjacency_matrix().to_dense()
     adj_max = torch.FloatTensor(adj_max)
+    e, u = eigen_decompositon(adj_max)
+    e = torch.FloatTensor(e)
+    u = torch.FloatTensor(u)
     # e, u = eigen_decompositon(adj_m)
     # np.savetxt(r'C:\Users\Lenovo\Desktop\代码调试\备份\bx-7 +10 - los - test - syx\eigenvalues.csv', e, delimiter=',')
     # # 保存eigenvectors
@@ -203,9 +206,7 @@ def Train(directory, epochs, n_classes, in_size, out_dim, dropout, slope, lr, wd
         adj_m = torch.FloatTensor(adj_m)
         adj_m=normalize_adjacency_matrix(adj_m)
 
-        e, u = eigen_decompositon(adj_m)
-        e = torch.FloatTensor(e)
-        u = torch.FloatTensor(u)
+    
 
         model = Specformer(
             adj = adj_m,
